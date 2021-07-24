@@ -27,3 +27,15 @@ sudo service rabbitmq-server start
 sudo rabbitmqctl set_policy "ha-all" '.*' '{"ha-mode": "all"}' 
 EOF
 }
+
+resource "aws_autoscaling_group" "broker_asg" {
+  name = "broker-asg"
+
+  max_size         = 2
+  min_size         = 1
+  desired_capacity = 2
+
+  availability_zones        = ["eu-central-1a", "eu-central-1b"]
+  launch_configuration      = aws_launch_configuration.node_launch_config.name
+  wait_for_capacity_timeout = 0
+}
