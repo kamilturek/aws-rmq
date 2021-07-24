@@ -12,7 +12,7 @@ variable "erlang_cookie" {
 }
 
 source "amazon-ebs" "node" {
-  ami_name      = "node"
+  ami_name      = "node-ami"
   instance_type = "t2.micro"
   region        = "eu-central-1"
 
